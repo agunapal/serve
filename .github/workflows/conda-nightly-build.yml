@@ -1,0 +1,14 @@
+name: Push conda nightly
+
+on:
+  # run every day at 11:15am
+  schedule:
+    - cron:  '15 11 * * *'
+jobs:
+  nightly:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: s-weigand/setup-conda@v1
+      - run: conda --version
+      - run: which python
