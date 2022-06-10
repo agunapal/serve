@@ -1,9 +1,9 @@
 name: Push conda nightly
 
-on:
+on: push
   # run every day at 11:15am
-  schedule:
-    - cron:  '15 11 * * *'
+  #schedule:
+  #  - cron:  '15 11 * * *'
 jobs:
   nightly:
     runs-on: ubuntu-18.04
