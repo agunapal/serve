@@ -8,8 +8,15 @@ jobs:
   nightly:
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
-      - uses: s-weigand/setup-conda@v1
+      - name: Setup Conda
+        uses: s-weigand/setup-conda@v1
       - run: conda --version
       - run: which python
-      - run: which python
+      - run: conda install -y conda-build
+      - name: Checkout TorchServe
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: python ts_scripts/install_dependencies.py --environment=dev
+      - name: Build whl files
+        run: python binaries/conda/build_packages.py
+
