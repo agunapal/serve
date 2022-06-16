@@ -43,6 +43,7 @@ jobs:
         run: conda config --set anaconda_upload yes
       - name: Selectively build packages
         run: python binaries/conda/build_packages.py --ts-wheel=dist/torchserve-*.whl --ma-wheel=model-archiver/dist/torch_model_archiver-*.whl --wa-wheel=workflow-archiver/dist/torch_workflow_archiver-*.whl --nightly
+      - name: Upload files ubuntu
         if: matrix.os == 'ubuntu-latest'
         run: anaconda upload --force --label main binaries/conda/output/linux-64/torch*dev*.bz2
       - name: Upload files macOS
