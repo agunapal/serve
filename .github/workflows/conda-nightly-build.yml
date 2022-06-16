@@ -31,7 +31,7 @@ jobs:
         run: python ts_scripts/install_dependencies.py --environment=dev
       - name: Upload files conda
         env:
-          ANACONDA_API_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
+          ANACONDA_API_TOKEN: ${{ secrets.CONDA_PASSWORD }}
         run: conda config --set anaconda_upload yes
       - name: Build torchserve wheel
         run: python binaries/build.py --nightly
@@ -39,7 +39,7 @@ jobs:
         run: python binaries/conda/build_packages.py
       - name: Upload files conda
         env:
-          ANACONDA_API_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
+          ANACONDA_API_TOKEN: ${{ secrets.CONDA_PASSWORD }}
         run: conda config --set anaconda_upload yes
       - name: Selectively build packages
         run: python binaries/conda/build_packages.py --ts-wheel=dist/torchserve-*.whl --ma-wheel=model-archiver/dist/torch_model_archiver-*.whl --wa-wheel=workflow-archiver/dist/torch_workflow_archiver-*.whl --nightly
