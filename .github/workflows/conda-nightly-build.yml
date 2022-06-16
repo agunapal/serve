@@ -30,7 +30,7 @@ jobs:
       - name: Install dependencies
         run: python ts_scripts/install_dependencies.py --environment=dev
       - name: Build torchserve wheel
-        run: python binaries/build.py
+        run: python binaries/build.py --nightly
       - name: Build all packages
         run: python binaries/conda/build_packages.py
       - name: Upload files linux
