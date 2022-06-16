@@ -46,7 +46,7 @@ def install_miniconda():
     os.system(f"{CONDA_BINARY} init")
 
 
-def conda_build(ts_wheel_path, ma_wheel_path, wa_wheel_path, nightly):
+def conda_build(ts_wheel_path, ma_wheel_path, wa_wheel_path, nightly=False):
     """
     Build conda packages for different python versions
     """
@@ -68,7 +68,7 @@ def conda_build(ts_wheel_path, ma_wheel_path, wa_wheel_path, nightly):
         ts_version +=  ".dev" + todays_date
         ma_version += ".dev" + todays_date
         wa_version += ".dev" + todays_date
-    print(ts_version)
+
     os.environ["TORCHSERVE_VERSION"] = ts_version
     os.environ["TORCH_MODEL_ARCHIVER_VERSION"] = ma_version
     os.environ["TORCH_WORKFLOW_ARCHIVER_VERSION"] = wa_version
