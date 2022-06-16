@@ -29,36 +29,34 @@ jobs:
         uses: actions/checkout@v2
       - name: Install dependencies
         run: python ts_scripts/install_dependencies.py --environment=dev
-      - name: Upload files conda
-        env:
-          ANACONDA_API_TOKEN: ${{ secrets.CONDA_PASSWORD }}
+      - name: conda config for auto-upload
         run: conda config --set anaconda_upload yes
       - name: Build torchserve wheel
         env:
           ANACONDA_API_TOKEN: ${{ secrets.CONDA_PASSWORD }}
         run: python binaries/build.py --nightly
-      - name: Build all packages
-        run: python binaries/conda/build_packages.py
-      - name: Upload files conda
-        env:
-          ANACONDA_API_TOKEN: ${{ secrets.CONDA_PASSWORD }}
-        run: conda config --set anaconda_upload yes
-      - name: Selectively build packages
-        env:
-          ANACONDA_API_TOKEN: ${{ secrets.CONDA_PASSWORD }}
-        run: python binaries/conda/build_packages.py --ts-wheel=dist/torchserve-*.whl --ma-wheel=model-archiver/dist/torch_model_archiver-*.whl --wa-wheel=workflow-archiver/dist/torch_workflow_archiver-*.whl --nightly
-      - name: Upload files ubuntu
-        env:
-          ANACONDA_API_TOKEN: ${{ secrets.CONDA_PASSWORD }}
-        if: matrix.os == 'ubuntu-latest'
-        run: anaconda upload --force --label main binaries/conda/output/linux-64/torch*dev*.bz2
-      - name: Upload files macOS
-        env:
-          ANACONDA_API_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
-        if: matrix.os == 'macOS-latest'
-        run: anaconda upload --force --label main binaries/conda/output/osx-64/torch*dev*.bz2
-      - name: Upload files windows
-        env:
-          ANACONDA_API_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
-        if: matrix.os == 'windows-latest'
-        run: anaconda upload --force --label main binaries/conda/output/win-64/torch*dev*.bz2
+      #- name: Build all packages
+      #  run: python binaries/conda/build_packages.py
+      #- name: Upload files conda
+      #  env:
+      #    ANACONDA_API_TOKEN: ${{ secrets.CONDA_PASSWORD }}
+      #  run: conda config --set anaconda_upload yes
+      #- name: Selectively build packages
+      #  env:
+      #    ANACONDA_API_TOKEN: ${{ secrets.CONDA_PASSWORD }}
+      #  run: python binaries/conda/build_packages.py --ts-wheel=dist/torchserve-*.whl --ma-wheel=model-archiver/dist/torch_model_archiver-*.whl --wa-wheel=workflow-archiver/dist/torch_workflow_archiver-*.whl --nightly
+      #- name: Upload files ubuntu
+      #  env:
+      #    ANACONDA_API_TOKEN: ${{ secrets.CONDA_PASSWORD }}
+      #  if: matrix.os == 'ubuntu-latest'
+      #  run: anaconda upload --force --label main binaries/conda/output/linux-64/torch*dev*.bz2
+      #- name: Upload files macOS
+      #  env:
+      #    ANACONDA_API_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
+      #  if: matrix.os == 'macOS-latest'
+      #  run: anaconda upload --force --label main binaries/conda/output/osx-64/torch*dev*.bz2
+      #- name: Upload files windows
+      #  env:
+      #    ANACONDA_API_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
+      #  if: matrix.os == 'windows-latest'
+      #  run: anaconda upload --force --label main binaries/conda/output/win-64/torch*dev*.bz2
