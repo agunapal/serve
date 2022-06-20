@@ -85,12 +85,6 @@ def conda_build(ts_wheel_path, ma_wheel_path, wa_wheel_path, nightly=False):
         ma_version += ".dev" + todays_date
         wa_version += ".dev" + todays_date
 
-    if nightly:
-        todays_date = date.today().strftime("%Y%m%d")
-        ts_version += ".dev" + todays_date
-        ma_version += ".dev" + todays_date
-        wa_version += ".dev" + todays_date
-
     os.environ["TORCHSERVE_VERSION"] = ts_version
     os.environ["TORCH_MODEL_ARCHIVER_VERSION"] = ma_version
     os.environ["TORCH_WORKFLOW_ARCHIVER_VERSION"] = wa_version
