@@ -17,6 +17,7 @@ from ts_scripts.utils import is_conda_build_env, is_conda_env
 
 
 def build(args):
+
     print("## Started torchserve, model-archiver and workflow-archiver build")
     create_wheel_cmd = "python setup.py bdist_wheel --release --universal"
 
