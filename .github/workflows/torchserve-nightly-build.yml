@@ -8,11 +8,15 @@ jobs:
   nightly:
     runs-on: ubuntu-18.04
     steps:
-      - name: Setup Python 3.8
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8
-          architecture: x64
+      - name: Setup Conda
+        uses: s-weigand/setup-conda@v1
+      - run: conda --version
+      - run: conda install -y conda-build
+      #- name: Setup Python 3.8
+      #  uses: actions/setup-python@v2
+      #  with:
+      #    python-version: 3.8
+      #    architecture: x64
       - name: Checkout TorchServe
         uses: actions/checkout@v2
       - name: Install dependencies
