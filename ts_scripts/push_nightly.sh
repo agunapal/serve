@@ -15,4 +15,5 @@ fi
 python3 -m twine upload \
     --username __token__ \
     --password "$PYPI_TOKEN" \
+    --repository-url https://test.pypi.org/legacy/ \
     dist/torch*
