@@ -33,4 +33,4 @@ jobs:
       - name: Push nightly
         env:
           PYPI_TOKEN: ${{ secrets.PYPI_PASSWORD }}
-        run: ts_scripts/push_nightly.sh torchserve-nightly
+        run: ts_scripts/push_nightly.sh torchserve-ag
