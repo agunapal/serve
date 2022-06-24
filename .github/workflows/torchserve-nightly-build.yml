@@ -6,7 +6,11 @@ on: push
   #  - cron:  '15 11 * * *'
 jobs:
   nightly:
-    runs-on: ubuntu-18.04
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macOS-latest, windows-latest]
     steps:
       - name: Setup Conda
         uses: s-weigand/setup-conda@v1
