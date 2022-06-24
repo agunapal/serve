@@ -6,11 +6,7 @@ on: push
   #  - cron:  '15 11 * * *'
 jobs:
   nightly:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, macOS-latest, windows-latest]
+    runs-on: ubuntu-18.04
     steps:
       - name: Setup Conda
         uses: s-weigand/setup-conda@v1
@@ -37,10 +33,10 @@ jobs:
       - name: Java Debugging
         run: |
           which javac
-      - name: Push nightly
-        env:
-          PYPI_TOKEN: ${{ secrets.PYPI_PASSWORD }}
-        run: ts_scripts/push_nightly.sh torchserve-ag
+      #- name: Push nightly
+      #  env:
+      #    PYPI_TOKEN: ${{ secrets.PYPI_PASSWORD }}
+      #  run: ts_scripts/push_nightly.sh torchserve-ag
       - name: Push nightly
         env:
           PYPI_TOKEN: ${{ secrets.PYPI_PASSWORD }}
