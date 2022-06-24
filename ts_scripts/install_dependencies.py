@@ -28,7 +28,7 @@ class Common:
                 print(
                     "CUDA not supported on MacOS. Refer https://pytorch.org/ for installing from source."
                 )
-                # sys.exit(1)
+                sys.exit(1)
             elif cuda_version == "cu92" and platform.system() == "Windows":
                 print(
                     "CUDA 9.2 not supported on Windows. Refer https://pytorch.org/ for installing from source."
