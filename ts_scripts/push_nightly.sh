@@ -15,5 +15,4 @@ fi
 python3 -m twine upload \
     --username __token__ \
     --password "$PYPI_TOKEN" \
-    dist/torch* model-archiver/dist/torch_model_archiver-*.whl \
-    workflow-archiver/dist/torch_workflow_archiver-*.whl
+    dist/torch*
