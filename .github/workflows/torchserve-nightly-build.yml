@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install twine
-          python ts_scripts/install_dependencies.py --cuda=cu102 --environment=dev
+          python ts_scripts/install_dependencies.py --environment=dev
           pip install -e .
       - name: Setup Java 11
         uses: actions/setup-java@v2
