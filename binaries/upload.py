@@ -27,6 +27,7 @@ def upload_pypi_packages(pypi_token=None, test_pypi=False):
     Takes a list of path values and uploads them to pypi using twine, using token stored in environment variable
     """
     os.system(f"pip3 install twine -q")
+    os.system(f"set -ex")
 
     # Note: TWINE_USERNAME and TWINE_PASSWORD are expected to be set in the environment
     for dist_path in [TS_WHEEL_PATH, MA_WHEEL_PATH, WA_WHEEL_PATH]:
