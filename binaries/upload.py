@@ -100,7 +100,7 @@ if __name__ == "__main__":
         upload_conda_packages()
 
     if args.upload_pypi_packages:
-        upload_pypi_packages(args.pypi - token)
+        upload_pypi_packages(args.pypi_token)
 
     if any([args.upload_conda_packages, args.upload_pypi_packages]):
         print(f"Upload script complete")
