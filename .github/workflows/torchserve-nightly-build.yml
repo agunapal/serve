@@ -40,4 +40,4 @@ jobs:
           PYPI_TOKEN: ${{ secrets.PYPI_TEST_TOKEN }}
         # skip pushing PyPI nightly binaries for macOS & windows
         if: matrix.os == 'ubuntu-latest'
-        run: python binaries/upload.py --upload-pypi-packages --pypi-token "$PYPI_TEST_TOKEN"
+        run: python binaries/upload.py --upload-pypi-packages --pypi-token "$PYPI_TOKEN"
