@@ -37,14 +37,15 @@ def upload_pypi_packages(pypi_token=None, test_pypi=False):
             )
         else:
             exit_code = os.system(
-                f"twine upload --username __token__ --password {pypi_token} {dist_path}/* --verbose"
+                f"set -ex ; twine upload --username __token__ --password {pypi_token} {dist_path}/* --verbose"
             )
         if exit_code != 0:
             print(f"twine upload for path {dist_path} failed")
 
-    print(
-        f"All packages uploaded to test.pypi.org successfully. Please install package as 'pip install -i https://test.pypi.org/simple/ <package-name>'"
-    )
+    if test_pypi:
+        print(
+            f"All packages uploaded to test.pypi.org successfully. Please install package as 'pip install -i https://test.pypi.org/simple/ <package-name>'"
+        )
 
 
 def upload_conda_packages():
