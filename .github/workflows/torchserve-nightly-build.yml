@@ -1,9 +1,9 @@
 name: Push torchserve nightly
 
-on: push
+on:
   # run every day at 11:15am
-  #schedule:
-  #  - cron:  '15 11 * * *'
+  schedule:
+    - cron:  '15 11 * * *'
 jobs:
   nightly:
     # creates workflows for the 3 OS: ubuntu, macOS & windows
@@ -37,7 +37,7 @@ jobs:
         run: python binaries/build.py --nightly
       - name: Push PyPI nightly binaries
         env:
-          PYPI_TOKEN: ${{ secrets.PYPI_TEST_TOKEN }}
-        # skip pushing PyPI nightly binaries for macOS & windows
+          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+        # skip pushing PyPI nightly binaries for macOS & windows as the binaries have the same name
         if: matrix.os == 'ubuntu-latest'
         run: python binaries/upload.py --upload-pypi-packages --pypi-token "$PYPI_TOKEN"
