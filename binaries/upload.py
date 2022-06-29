@@ -30,6 +30,8 @@ def upload_pypi_packages(pypi_token=None):
 
     # Note: TWINE_USERNAME and TWINE_PASSWORD are expected to be set in the environment
     for dist_path in [TS_WHEEL_PATH, MA_WHEEL_PATH, WA_WHEEL_PATH]:
+        print("dist_path is ", dist_path)
+        os.system(f"ls {dist_path}/*")
         exit_code = os.system(
             f"twine upload --username __token__ --password {pypi_token} {dist_path}/* --repository-url https://test.pypi.org/legacy/ --verbose"
         )
