@@ -22,7 +22,7 @@ WA_WHEEL_PATH = glob.glob(os.path.join(REPO_ROOT, "workflow-archiver", "dist"))[
 PACKAGES = ["torchserve", "model-archiver", "workflow-archiver"]
 
 
-def upload_pypi_packages(pypi_token=None):
+def upload_pypi_packages(pypi_token=None, test_pypi=False):
     """
     Takes a list of path values and uploads them to pypi using twine, using token stored in environment variable
     """
@@ -30,14 +30,17 @@ def upload_pypi_packages(pypi_token=None):
 
     # Note: TWINE_USERNAME and TWINE_PASSWORD are expected to be set in the environment
     for dist_path in [TS_WHEEL_PATH, MA_WHEEL_PATH, WA_WHEEL_PATH]:
-        print("dist_path is ", dist_path)
-        print(pypi_token)
-        os.system(f"ls {dist_path}/*")
-        exit_code = os.system(
-            f"twine upload --username __token__ --password {pypi_token} {dist_path}/* --repository-url https://test.pypi.org/legacy/ --verbose"
-        )
+        if test_pypi:
+            exit_code = os.system(
+                f"twine upload --username __token__ --password {pypi_token} {dist_path}/* --repository-url https://test.pypi.org/legacy/ --verbose"
+            )
+        else:
+            exit_code = os.system(
+                f"twine upload --username __token__ --password {pypi_token} {dist_path}/* "
+            )
         if exit_code != 0:
             print(f"twine upload for path {dist_path} failed")
+            exit(0)
 
     print(
         f"All packages uploaded to test.pypi.org successfully. Please install package as 'pip install -i https://test.pypi.org/simple/ <package-name>'"
@@ -97,13 +100,19 @@ if __name__ == "__main__":
         required=False,
         help="PyPI token for uploading binaries",
     )
+    parser.add_argument(
+        "--test-pypi",
+        action="store_true",
+        required=False,
+        help="Specify whether to upload to test PyPI",
+    )
     args = parser.parse_args()
 
     if args.upload_conda_packages:
         upload_conda_packages()
 
     if args.upload_pypi_packages:
-        upload_pypi_packages(args.pypi_token)
+        upload_pypi_packages(args.pypi_token, args.test_pypi)
 
     if any([args.upload_conda_packages, args.upload_pypi_packages]):
         print(f"Upload script complete")
