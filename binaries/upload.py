@@ -2,6 +2,7 @@
 import argparse
 import glob
 import os
+import sys
 
 # The following environment variables are expected to be populated in the shell environment
 PYPI_USERNAME_ENV_VARIABLE = "TWINE_USERNAME"
@@ -40,7 +41,7 @@ def upload_pypi_packages(pypi_token=None, test_pypi=False):
                 f"set -ex ; twine upload --username __token__ --password {pypi_token} {dist_path}/* --verbose"
             )
         if exit_code != 0:
-            print(f"twine upload for path {dist_path} failed")
+            sys.exit(f"twine upload for path {dist_path} failed")
 
     if test_pypi:
         print(
