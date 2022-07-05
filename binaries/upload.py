@@ -29,6 +29,7 @@ def upload_pypi_packages(test_pypi=False):
     optionally pypi_token can be passed as an argument
     """
 
+    os.system("pip list")
     # Note: TWINE_USERNAME and TWINE_PASSWORD are expected to be set in the environment
     for dist_path in [TS_WHEEL_PATH, MA_WHEEL_PATH, WA_WHEEL_PATH]:
         if test_pypi:
