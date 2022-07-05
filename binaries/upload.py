@@ -33,11 +33,11 @@ def upload_pypi_packages(test_pypi=False):
     for dist_path in [TS_WHEEL_PATH, MA_WHEEL_PATH, WA_WHEEL_PATH]:
         if test_pypi:
             exit_code = os.system(
-                f"set -ex ; python -m twine upload {dist_path}/* --username __token__ --repository-url https://test.pypi.org/legacy/"
+                f"set -ex ; twine upload {dist_path}/* --username __token__ --repository-url https://test.pypi.org/legacy/"
             )
         else:
             exit_code = os.system(
-                f"set -ex ; python -m twine upload --username __token__ {dist_path}/*"
+                f"set -ex ; twine upload --username __token__ {dist_path}/*"
             )
         if exit_code != 0:
             sys.exit(f"twine upload for path {dist_path} failed")
