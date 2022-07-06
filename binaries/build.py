@@ -7,12 +7,12 @@ import sys
 REPO_ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 sys.path.append(REPO_ROOT)
 
-
 from binaries.conda.build_packages import (
     conda_build,
     install_conda_build,
     install_miniconda,
 )
+from ts_scripts.utils import is_conda_build_env, is_conda_env
 
 
 def build(args):
