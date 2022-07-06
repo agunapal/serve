@@ -34,7 +34,6 @@ def install_conda_build():
     Install conda-build, required to create conda packages
     """
 
-    print("Checking conda !!!!!!!!!!!!!!!!!!!!!")
     # Check if conda binary already exists
     exit_code = os.system(f"conda --version")
     if exit_code == 0:
@@ -50,7 +49,6 @@ def install_miniconda():
     Installs miniconda, a slimmer anaconda installation to build conda packages
     """
 
-    print("Checking miniconda !!!!!!!!!!!!!!!!!!!!!")
     # Check if conda binary already exists
     exit_code = os.system(f"conda --version")
     if exit_code == 0:
