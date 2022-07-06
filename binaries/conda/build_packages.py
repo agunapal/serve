@@ -39,7 +39,7 @@ def install_conda_build():
     exit_code = os.system(f"conda --version")
     if exit_code == 0:
         print(
-            f"'conda' already present on the system. Proceeding without a fresh minconda installation."
+            f"'conda' already present on the system. Proceeding without a fresh conda installation."
         )
         return
     os.system(f"{CONDA_BINARY} install python=3.8 conda-build anaconda-client -y")
