@@ -26,7 +26,6 @@ PACKAGES = ["torchserve", "model-archiver", "workflow-archiver"]
 def upload_pypi_packages(args):
     """
     Takes a list of path values and uploads them to pypi using twine, using token stored in environment variable
-    optionally pypi_token can be passed as an argument
     """
 
     # Note: TWINE_USERNAME and TWINE_PASSWORD are expected to be set in the environment
