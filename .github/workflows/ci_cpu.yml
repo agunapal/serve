@@ -38,7 +38,7 @@ jobs:
       - name: Torchserve Sanity
         uses: nick-fields/retry@v2
         with:
-          timeout_minutes: 10
+          timeout_minutes: 30
           max_attempts: 3
           command: |
             python torchserve_sanity.py
