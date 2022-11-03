@@ -42,11 +42,11 @@ jobs:
         env:
           TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
         if: matrix.os == 'ubuntu-latest'
-        run: python binaries/upload.py --upload-pypi-packages
+        run: python binaries/upload.py --upload-pypi-packages --test-pypi
       - name: Login to Docker
         env:
           DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-        run: docker login --username pytorchbot --password "$DOCKER_PASSWORD"
+        run: docker login --username agunapal --password "$DOCKER_PASSWORD"
       - name: Build & Upload pytorch/torchserve Docker images
         if: matrix.os == 'ubuntu-latest'
         run: |
