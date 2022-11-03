@@ -34,7 +34,7 @@ if __name__ == "__main__":
         dry_run,
     )
     try_and_handle(
-        f"docker tag {organization}/torchserve-latest {organization}/torchserve:latest-cpu",
+        f"docker tag {organization}/torchserve:latest {organization}/torchserve:latest-cpu",
         dry_run,
     )
     try_and_handle(
