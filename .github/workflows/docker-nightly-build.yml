@@ -19,7 +19,7 @@ jobs:
       - name: Login to Docker
         env:
           DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-        run: docker login --username pytorchbot --password "$DOCKER_PASSWORD"
+        run: docker login --username agunapal --password "$DOCKER_PASSWORD"
       - name: Push Docker Nightly
         run: |
           cd docker
