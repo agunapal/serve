@@ -1,9 +1,9 @@
 name: Push torchserve nightly
 
-on:
+on: push
   # run every day at 11:15am
-  schedule:
-    - cron:  '15 11 * * *'
+  #schedule:
+  #  - cron:  '15 11 * * *'
 jobs:
   nightly:
     # creates workflows for the 3 OS: ubuntu, macOS & windows
