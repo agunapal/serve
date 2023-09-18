@@ -3,9 +3,10 @@ name: Cleanup PYPI Nightly
 on: workflow_dispatch
 
 jobs:
+  cleanup-pypi-nightly:
     runs-on: ubuntu-20.04
     environment:
-      name: cleanup_pypi_nightly
+      name: cleanup-pypi-nightly
     steps:
       - name: Setup Python 3.8
         uses: actions/setup-python@v4
