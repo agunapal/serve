@@ -8,22 +8,14 @@ REPO_ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 sys.path.append(REPO_ROOT)
 
 
-from binaries.conda.build_packages import (
-    conda_build,
-    install_conda_build,
-    install_miniconda,
-)
-from ts_scripts.utils import is_conda_build_env, is_conda_env
-
-
 def build_dist_whl(args):
     """
     Function to build the wheel files for torchserve, model-archiver and workflow-archiver
     """
     binaries = [
-        "torchserve-ag",
-        "torch-model-archiver-ag",
-        "torch-workflow-archiver-ag",
+        "torchserve",
+        "torch-model-archiver",
+        "torch-workflow-archiver",
     ]
     if args.nightly:
         print(
@@ -43,7 +35,7 @@ def build_dist_whl(args):
         os.chdir(cur_dir)
 
         cur_wheel_cmd = (
-            create_wheel_cmd + "--override-name " + binary + "-nightly" + " bdist_wheel"
+            create_wheel_cmd + "--override-name " + binary + "-ag" + " bdist_wheel"
             if args.nightly
             else create_wheel_cmd
         )
@@ -82,21 +74,21 @@ def build(args):
     print(f"## Model archiver wheel location: {ma_wheel_path}")
     print(f"## Workflow archiver wheel location: {ma_wheel_path}")
 
-    # Build TS & MA on Conda if available
-    conda_build_exit_code = 0
-    if not is_conda_env():
-        install_miniconda(args.dry_run)
+    ## Build TS & MA on Conda if available
+    # conda_build_exit_code = 0
+    # if not is_conda_env():
+    #    install_miniconda(args.dry_run)
 
-    if not is_conda_build_env():
-        install_conda_build(args.dry_run)
+    # if not is_conda_build_env():
+    #    install_conda_build(args.dry_run)
 
-    conda_build_exit_code = conda_build(
-        ts_wheel_path, ma_wheel_path, wa_wheel_path, args.nightly, args.dry_run
-    )
+    # conda_build_exit_code = conda_build(
+    #    ts_wheel_path, ma_wheel_path, wa_wheel_path, args.nightly, args.dry_run
+    # )
 
-    # If conda build fails, exit with error
-    if conda_build_exit_code != 0:
-        sys.exit("## Conda Build Failed !")
+    ## If conda build fails, exit with error
+    # if conda_build_exit_code != 0:
+    #    sys.exit("## Conda Build Failed !")
 
 
 if __name__ == "__main__":
