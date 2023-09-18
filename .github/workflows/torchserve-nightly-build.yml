@@ -33,7 +33,7 @@ jobs:
       #  run: python binaries/upload.py --upload-conda-packages
       - name: Push PyPI nightly binaries
         env:
-          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+          TWINE_PASSWORD: ${{ secrets.AG_PYPI_TOKEN }}
         run: python binaries/upload.py --upload-pypi-packages
       #- name: Open issue on failure
       #  if: ${{ failure() && github.event_name  == 'schedule' }}
