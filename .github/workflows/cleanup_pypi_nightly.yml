@@ -1,6 +1,8 @@
 name: Cleanup PYPI Nightly
 
-on: workflow_dispatch
+#on: workflow_dispatch
+on:
+  push:
 
 jobs:
   cleanup-pypi-nightly:
