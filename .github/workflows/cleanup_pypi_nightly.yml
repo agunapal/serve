@@ -20,4 +20,4 @@ jobs:
       - name: Clean up
         env:
           AG_PYPI_TOKEN: ${{ secrets.AG_PYPI_TOKEN }}
-        run: pypi-cleanup --username ${{ secrets.AG_PYPI_TOKEN }} -p torchserve-ag -n -r '2022'
+        run: pypi-cleanup --username ${{ secrets.AG_PYPI_TOKEN }} -p torchserve-ag  -r '2022'
