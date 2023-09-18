@@ -20,7 +20,11 @@ def build_dist_whl(args):
     """
     Function to build the wheel files for torchserve, model-archiver and workflow-archiver
     """
-    binaries = ["torchserve", "torch-model-archiver", "torch-workflow-archiver"]
+    binaries = [
+        "torchserve-ag",
+        "torch-model-archiver-ag",
+        "torch-workflow-archiver-ag",
+    ]
     if args.nightly:
         print(
             "## Started torchserve, model-archiver and workflow-archiver nightly build"
@@ -31,7 +35,6 @@ def build_dist_whl(args):
         create_wheel_cmd = "python setup.py bdist_wheel --release"
 
     for binary in binaries:
-
         if "serve" in binary:
             cur_dir = REPO_ROOT
         else:
@@ -56,7 +59,6 @@ def build_dist_whl(args):
 
 
 def build(args):
-
     # Build dist wheel files
     build_dist_whl(args)
 

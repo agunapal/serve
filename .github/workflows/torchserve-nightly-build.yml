@@ -1,9 +1,10 @@
 name: Push torchserve nightly
 
 on:
+  push
   # run every day at 11:15am
-  schedule:
-    - cron:  '15 11 * * *'
+  #schedule:
+  #  - cron:  '15 11 * * *'
 jobs:
   nightly:
     runs-on: ubuntu-20.04
@@ -33,11 +34,11 @@ jobs:
         env:
           TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
         run: python binaries/upload.py --upload-pypi-packages
-      - name: Open issue on failure
-        if: ${{ failure() && github.event_name  == 'schedule' }}
-        uses: dacbd/create-issue-action@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          title: Nightly Build failed
-          body:  Commit ${{ github.sha }} daily scheduled [CI run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) failed, please check why
-          assignees: ''
+      #- name: Open issue on failure
+      #  if: ${{ failure() && github.event_name  == 'schedule' }}
+      #  uses: dacbd/create-issue-action@v1
+      #  with:
+      #    token: ${{ secrets.GITHUB_TOKEN }}
+      #    title: Nightly Build failed
+      #    body:  Commit ${{ github.sha }} daily scheduled [CI run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) failed, please check why
+      #    assignees: ''
