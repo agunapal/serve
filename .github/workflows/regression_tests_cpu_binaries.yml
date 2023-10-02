@@ -1,10 +1,11 @@
 name: Run Regression Tests for CPU nightly binaries
 
 on:
+  push
   # run every day at 6:15am
-  schedule:
-    - cron:  '15 6 * * *'
-  merge_group:
+  #schedule:
+  #  - cron:  '15 6 * * *'
+  #merge_group:
 
 concurrency:
   group: ci-cpu-${{ github.workflow }}-${{ github.ref == 'refs/heads/master' && github.run_number || github.ref }}
@@ -30,6 +31,7 @@ jobs:
           conda-channels: anaconda, conda-forge
       - run: conda --version
       - run: python --version
+      - run: python a
       - name: Setup Java 17
         uses: actions/setup-java@v3
         with:
