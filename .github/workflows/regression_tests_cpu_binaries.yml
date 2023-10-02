@@ -1,12 +1,10 @@
 name: Run Regression Tests for CPU nightly binaries
 
 on:
-  push:
   # run every day at 6:15am
-  #schedule:
-  #  - cron:  '15 6 * * *'
-  #merge_group:
-  workflow_dispatch:
+  schedule:
+    - cron:  '15 6 * * *'
+  merge_group:
 
 concurrency:
   group: ci-cpu-${{ github.workflow }}-${{ github.ref == 'refs/heads/master' && github.run_number || github.ref }}
@@ -19,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04]
+        os: [ubuntu-20.04, macOS-latest]
         python-version: ["3.8", "3.9", "3.10"]
         binaries: ["pypi", "conda"]
     steps:
@@ -32,7 +30,6 @@ jobs:
           conda-channels: anaconda, conda-forge
       - run: conda --version
       - run: python --version
-      - run: python a
       - name: Setup Java 17
         uses: actions/setup-java@v3
         with:
@@ -46,21 +43,3 @@ jobs:
       - name: Torchserve Regression Tests
         run: |
           python test/regression_tests.py --binaries --${{ matrix.binaries }} --nightly
-
-  #################################
-  ### Run when a schedule failed ###
-  ##################################
-  restart_when_failed:
-    name: Restarts the scheduled run when it failed
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' && failure()
-    needs: [regression-cpu-nightly-binaries]
-    steps:
-      - name: Retry the workflow
-        run: |
-          curl -i \
-          -X POST \
-          -H "Accept: application/vnd.github.v3+json" \
-          -H "Authorization: token ${{ secrets.ACTIONS_PAT }}" \
-          https://api.github.com/repos/agunapal/serve/workflows/70597408/dispatches \
-          -d '{"ref": "${{ github.ref }}" }'
