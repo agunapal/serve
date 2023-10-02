@@ -11,7 +11,7 @@ jobs:
     steps:
       - run: echo ${{ github.event.workflow_run.conclusion }}
       - name: Re-run on failure
-        if: ${{ github.event.workflow_run.conclusion == 'faliure' }}
+        if: ${{ github.event.workflow_run.conclusion == 'failure' }}
         run: |
           curl -L \
           -X POST \
