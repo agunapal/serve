@@ -38,4 +38,4 @@ if __name__ == "__main__":
         f"{organization}/torchserve-kfs:{check_ts_version()}",
         f"{organization}/torchserve-kfs:{check_ts_version()}-gpu",
     ]:
-        try_and_handle(f"docker push {image}", dry_run)
+        try_and_handle(f"docker push {image}", dry_run=True)
