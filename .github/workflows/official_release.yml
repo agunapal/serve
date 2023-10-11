@@ -10,6 +10,7 @@ jobs:
       name: official-release
     steps:
       - run: echo $USER
+      - run: docker run hello-world
       - name: Setup Miniconda
         uses: conda-incubator/setup-miniconda@v2
         with:
